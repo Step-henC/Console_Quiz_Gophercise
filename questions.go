@@ -27,7 +27,9 @@ func parseFile(filename string) []string {
 
 	res := string(quizBytes)
 
-	return strings.Split(res, ",")
+	quizArr := strings.Split(res, ",")
+
+	return quizArr
 
 }
 
@@ -40,17 +42,12 @@ func createQuiz(csvLines []string) []qAnda {
 
 	var quiz []qAnda
 
-	for i, line := range csvLines {
+	for i := 0; i < len(csvLines); i += 2 {
 
 		var elem qAnda
 
-		if i%2 == 0 {
-
-			elem.question = line
-
-		} else {
-			elem.answer = line
-		}
+		elem.question = csvLines[i]
+		elem.answer = csvLines[i+1]
 
 		quiz = append(quiz, elem)
 
